@@ -4,7 +4,6 @@ Created on Mon Jan 20 04:15:47 2025
 
 @author: luthr
 """
-
 import streamlit as st
 import pandas as pd
 from sklearn.model_selection import train_test_split
@@ -15,12 +14,13 @@ from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 # App title
 st.title("Student Performance Prediction")
 
-# File uploader for dataset
-uploaded_file = st.file_uploader("Upload the student dataset (CSV format)", type="csv")
+# Path to the dataset on your computer
+dataset_path = r"C:\path\to\your\dataset.csv"  # Replace with the actual path to your dataset
 
-if uploaded_file is not None:
-    # Step 1: Load the dataset
-    data = pd.read_csv(uploaded_file)
+# Step 1: Load the dataset
+try:
+    data = pd.read_csv(dataset_path)
+    st.write("Dataset Loaded Successfully!")
     st.write("Dataset Preview:")
     st.dataframe(data.head())
 
@@ -32,7 +32,7 @@ if uploaded_file is not None:
     ]
     missing_cols = [col for col in required_columns if col not in data.columns]
     if missing_cols:
-        st.error(f"The uploaded dataset is missing the following columns: {missing_cols}")
+        st.error(f"The dataset is missing the following columns: {missing_cols}")
     else:
         # Step 3: Preprocess the dataset
         X = data.drop(columns=["G3"])
@@ -78,3 +78,6 @@ if uploaded_file is not None:
             file_name="student_predictions.csv",
             mime="text/csv",
         )
+
+except FileNotFoundError:
+    st.error(f"The file at {dataset_path} was not found. Please check the path.")
