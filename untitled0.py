@@ -16,7 +16,7 @@ from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 st.title("Student Performance Prediction")
 
 # Path to the dataset on your computer
-dataset_path = r"C:\Users\luthr\Downloads\archive\student_data.csv" # Replace with the actual path to your dataset
+dataset_path = r"https://github.com/M-luthra07/student-performance-prediction-model/blob/main/student_data.csv"# Replace with the actual path to your dataset
 
 # Step 1: Load the dataset
 try:
